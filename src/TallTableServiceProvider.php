@@ -19,43 +19,43 @@ class TallTableServiceProvider extends ServiceProvider
 
         $this->publishViews();
         $this->publishConfigs();
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', "tall-table");
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', "table");
         
         
         
         include_once __DIR__."/../helpers.php";
         
-        Livewire::component( 'tall-table-edit-component', \Tall\Table\Livewire\EditColumn::class);
-        Livewire::component( 'tall-table::reports-component', \Tall\Table\Livewire\ReportsComponent::class);
-        Livewire::component( 'tall-table::report-component', \Tall\Table\Livewire\ReportComponent::class);
+        Livewire::component( 'table-edit-component', \Tall\Table\Livewire\EditColumn::class);
+        Livewire::component( 'table::reports-component', \Tall\Table\Livewire\ReportsComponent::class);
+        Livewire::component( 'table::report-component', \Tall\Table\Livewire\ReportComponent::class);
         
     }
 
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/tall-table.php','tall-table'
+            __DIR__ . '/../config/table.php','table'
         );
         $this->app->register(RouteServiceProvider::class);
     }
     
     private function publishViews(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-table');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'table');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/tall-table'),
-        ], 'tall-table-views');
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/table'),
+        ], 'table-views');
     }
 
     private function publishConfigs(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/tall-table.php' => config_path('tall-table.php'),
-        ], 'tall-table-config');
+            __DIR__ . '/../config/table.php' => config_path('table.php'),
+        ], 'table-config');
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/tall-table' ),
-        ], 'tall-table-lang');
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/table' ),
+        ], 'table-lang');
     }
 }

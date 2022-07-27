@@ -1,7 +1,7 @@
 <x-slot name="header">
     <header>
         <!-- Section Hero -->
-        @include('tall-table::header', ['label' => \Arr::get($tableAttr, 'tableTitle')])
+        @include('table::header', ['label' => \Arr::get($tableAttr, 'tableTitle')])
 
     </header>
 </x-slot>

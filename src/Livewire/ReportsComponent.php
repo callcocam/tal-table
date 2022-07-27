@@ -39,7 +39,7 @@ class ReportsComponent extends Component
 
     public function render()
     {
-        return view("tall-table::livewire.reports-component");
+        return view("table::livewire.reports-component");
     }
 
      /*

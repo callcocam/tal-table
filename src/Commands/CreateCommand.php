@@ -13,9 +13,9 @@ use Illuminate\Support\{Arr, Str};
 
 class CreateCommand extends Command{
     protected $signature = 'tall:table
-    {--template= : nome para o component de tall-table}';
+    {--template= : nome para o component de table}';
 
-    protected $description = 'Make a new tall-table component.';
+    protected $description = 'Make a new table component.';
 
     protected $tableName = 'ListComponent';
 

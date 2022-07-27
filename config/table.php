@@ -6,5 +6,6 @@
 */
 
 return [
-    'layout'=>'tall-table::layouts.app'
+    // 'layout'=>'table::layouts.app'
+    "layout"=>"theme::layouts.app",
 ];

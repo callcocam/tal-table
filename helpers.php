@@ -45,10 +45,10 @@ if(!function_exists("include_table")){
 
     function include_table($view)
     {
-        if (function_exists('theme_include_table')) {    
-            return theme_include_table($view);
-        }
-       return "tall-table::includes.{$view}";
+        // if (function_exists('theme_include_table')) {    
+        //     return theme_include_table($view);
+        // }
+       return "table::includes.{$view}";
     }
 }
 

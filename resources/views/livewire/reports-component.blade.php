@@ -6,7 +6,7 @@
 
             @if ($models)
                 @foreach ($models as $model)
-                    @livewire('tall-table::report-component', ['model' => $model], key($model->id))
+                    @livewire('table::report-component', ['model' => $model], key($model->id))
                 @endforeach
             @endif
 

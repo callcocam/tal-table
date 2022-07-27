@@ -42,18 +42,17 @@ abstract class TableComponent extends Component
     abstract protected function query();
  
     protected function view(){
-        if(function_exists("tableView")){
-            return tableView();
-        }
-        return "tall-table::datatable";
+        // if(function_exists("tableView")){
+        //     return tableView();
+        // }
+        return "table::datatable";
     }
 
     protected function layout(){
-        if(function_exists('theme_layout')){
-           return theme_layout($this->layout);
-        }
-      return config('tall-table.layout');
-  
+        if(config("table.layout")){
+            return config("table.layout");
+         }
+         return config('livewire.layout');  
      }
 
     public function updatedPage(): void
@@ -102,7 +101,6 @@ abstract class TableComponent extends Component
         }
 
         $this->columns  = $this->makeColumns();
-
         return view($this->view())
         ->with([
             'models'=>$this->models($this->columns),

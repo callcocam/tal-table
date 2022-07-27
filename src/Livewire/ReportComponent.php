@@ -74,7 +74,7 @@ class ReportComponent extends Component
 
     public function render()
     {
-        return view("tall-table::livewire.report-component");
+        return view("table::livewire.report-component");
     }
 
 }
