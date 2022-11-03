@@ -5,7 +5,4 @@
 * https://www.sigasmart.com.br
 */
 
-return [
-    // 'layout'=>'table::layouts.app'
-    "layout"=>"theme::layouts.app",
-];
+return [];

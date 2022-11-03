@@ -5,7 +5,10 @@
     "keywords": ["framework", "laravel", "livewire", "alpinejs", "tailwindcss"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0"
+        "php": "^7.3|^8.0",
+        "callcocam/tall-sluggable": "dev-main",
+        "callcocam/tall-compnents": "dev-main",
+        "callcocam/tall-orm": "dev-main"
     },
     "autoload": {
         "psr-4": {
@@ -16,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Tall\\Table\\TallTableServiceProvider"
+                "Tall\\Table\\TableServiceProvider"
             ]
         }
     },

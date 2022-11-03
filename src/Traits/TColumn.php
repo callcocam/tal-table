@@ -5,17 +5,16 @@
  * https://www.sigasmart.com.br
  */
 
-namespace Tall\Table\Fields;
+namespace Tall\Table\Traits;
 
 use Tall\Orm\Traits\Kill;
 
 /**
  * Class Column.
  */
-class Column
+trait TColumn
 {
     use Kill;
-
    
     /**
      * @var string
@@ -46,9 +45,9 @@ class Column
     /**
      * @param string $attribute
      *
-     * @return Column
+     * @return TColumn
      */
-    public static function make(string $attribute): Column
+    public static function make(string $attribute): TColumn
     {
         return new static($$attribute);
     }
