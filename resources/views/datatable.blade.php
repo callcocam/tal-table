@@ -1,69 +1,54 @@
-<x-tall-app-table :tableAttr="$tableAttr">
-    <x-slot name="actions">
-        <ul>
-            @if ($route = data_get($tableAttr, 'crud.create'))
-                <li>
-                    <a href="{{ $route }}"
-                        class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
-                        {{ __('Cadastrar Novo') }}
-                    </a>
-                </li>
-            @endif
+<x-tall-app-main :$tableAttr>
+    <x-tall-app-filter :$filters :$tableAttr :status="$statusOptions" wire:model="isFilterExpanded">
+        @if ($selected)
+            <x-slot name="actions">
+                <x-tall-dropdown label="Bulk Actions">
+                    <x-tall-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
+                        <x-tall-icon.download class="text-cool-gray-400" /> <span>{{ __('Export') }}</span>
+                    </x-tall-dropdown.item>
+                    <x-tall-table.delete-confirm wire:click="deleteSelected">
+                        <x-tall-icon.trash class="text-cool-gray-400" /> <span>{{ __('Delete') }}</span>
+                    </x-tall-table.delete-confirm>
+                </x-tall-dropdown>
+            </x-slot>
+        @endif
 
-            <li>
-                <a href="#"
-                    class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another
-                    Action</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something
-                    else</a>
-            </li>
-        </ul>
-    </x-slot>
-    <x-slot name="header">
-        <th
-            class="whitespace-nowrap rounded-tl-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-            {{ __('Name') }}
-        </th>
-        <th
-            class="whitespace-nowrap rounded-tl-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-            {{ __('Status') }}
-        </th>
-        <th
-            class="whitespace-nowrap rounded-tr-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-            @if ($route = data_get($tableAttr, 'crud.create'))
-                <a href="{{ $route }}"
-                    class="flex items-center px-3  font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
-                    {{ __('Cadastrar Novo') }}
-                </a>
-            @endif
-        </th>
-    </x-slot>
-    @if ($models)
-        @foreach ($models as $model)
-            <tr class="border-y border-transparent border-b-slate-200 dark:border-b-navy-500">
-                <td class="whitespace-nowrap px-4 py-3 sm:px-5">{{ $model->name }}</td>
-                <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                    <label class="inline-flex items-center">
-                        <input value="published" wire:model='status.{{ $model->id }}'
-                            class="form-switch h-5 w-10 rounded-full bg-slate-300 before:rounded-full before:bg-slate-50 checked:bg-primary checked:before:bg-white dark:bg-navy-900 dark:before:bg-navy-300 dark:checked:bg-accent dark:checked:before:bg-white"
-                            type="checkbox" />
-                    </label>
-                </td>
-                <td class="px-4 py-3 sm:px-5 flex space-x-3">
-                    <a href="{{ route('admin.make.edit', $model) }}">
-                        <x-tall-icon name="pencil" />
-                    </a>
-                    <a href="{{ route('admin.make.show', $model) }}">
-                        <x-tall-icon name="eye" />
-                    </a>
-                </td>
-            </tr>
-        @endforeach
-        <x-slot name="pagination">
-            {{ $models->links() }}
-        </x-slot>
-    @endif
-</x-tall-app-table>
+        <x-tall-app-table>
+            <x-slot name="head">
+                <x-tall-table.heading class="pr-0 w-8">
+                    <x-tall-input.checkbox wire:model="selectPage" />
+                </x-tall-table.heading>
+                @foreach ($columns as $column)
+                    <x-tall-table.heading :sortable="$column->sortable" :name="$column->name">
+                        {{ __($column->label) }}
+                    </x-tall-table.heading>
+                @endforeach
+            </x-slot>
+            @if ($selectPage)
+                <x-tall-table.sample-row class="bg-cool-gray-200" wire:key="row-message">
+                    <x-tall-table.cell colspan="100">
+                        @unless($selectAll)
+                            <div>
+                                <span>{{ __('You have selected') }} <strong>{{ $models->count() }}</strong>
+                                    {{ __('transactions, do you want to select all') }}
+                                    <strong>{{ $models->total() }}</strong>?</span>
+                                <x-tall-button.link wire:click="selectAll" class="ml-1 text-blue-600">{{ __('Select All') }}
+                                </x-tall-button.link>
+                            </div>
+                        @else
+                            <span>{{ __('You are currently selecting all') }} <strong>{{ $models->total() }}</strong>
+                                {{ __('transactions') }}.</span>
+                @endif
+                </x-tall-table.cell>
+                </x-tall-table.sample-row>
+                @endif
+                @foreach ($models as $model)
+                    <x-tall-table.row :$columns :$model :$tableAttr wire:loading.class.delay="opacity-50"
+                        wire:key="row-{{ $model->id }}" />
+                @endforeach
+                <x-slot name="pagination">
+                    {{ $models->links() }}
+                </x-slot>
+            </x-tall-app-table>
+        </x-tall-app-filter>
+    </x-tall-app-main>

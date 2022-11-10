@@ -1,5 +1,8 @@
 @props(['tableAttr' => []])
-<main class="main-content w-full px-[var(--margin-x)] pb-8">
+<main class="main-content w-full px-[var(--margin-x)] pb-8" x-init="() => {
+    $wire.on('notification', (e) => $notification(e))
+
+}">
     <div class="flex items-center space-x-4 py-5 lg:py-6">
         <h2 class="text-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
             {{ data_get($tableAttr, 'title', 'Lists') }}

@@ -1,5 +1,5 @@
-<div class="card mt-3">
-    <div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+<div class="card mt-3" >
+    <div class="is-scrollbar-hidden min-w-full overflow-x-auto" >
         <table class="is-hoverable w-full text-left">
             <thead>
                 <tr>
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Delete Transactions Modal -->
-    <form wire:submit.prevent="deleteSelected">
+    {{-- <form wire:submit.prevent="deleteSelected">
         <x-tall-table.modal.confirmation wire:model.defer="showDeleteModal">
             <x-slot name="title">Delete Transaction</x-slot>
 
@@ -32,5 +32,5 @@
                 <x-tall-button.primary type="submit">Delete</x-tall-button.primary>
             </x-slot>
         </x-tall-table.modal.confirmation>
-    </form>
+    </form> --}}
 </div>

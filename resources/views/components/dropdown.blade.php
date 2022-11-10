@@ -10,7 +10,7 @@
 
 @props(['label' => ''])
 
-<div x-data="{ open: @entangle($attributes->wire('model')) }" @keydown.window.escape="$set('isShowPopper', false)" @click.away="$set('isShowPopper', false)"
+<div x-data="{ open: @entangle('isShowPopper').defer }" @keydown.window.escape="open= false" @click.away="open= false"
     class="relative inline-block text-left z-10">
     <div>
         <span class="rounded-md shadow-sm">
