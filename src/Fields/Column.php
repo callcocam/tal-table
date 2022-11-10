@@ -7,64 +7,72 @@
 
 namespace Tall\Table\Fields;
 
-use Tall\Orm\Traits\Kill;
+use Tall\Orm\Core\Table\Traits\TColumn;
+
+use Illuminate\Support\Str;
 
 /**
  * Class Column.
  */
 class Column
 {
-    use Kill;
-
-   
-    /**
-     * @var string
-     */
-    protected $name;
-   
-    /**
-     * @var bool
-     */
-    protected $searchable = true;
-
-    /**
-     * @var bool
-     */
-    protected $sortable = true;
-
+    use TColumn;
 
     /**
      * Column constructor.
      *
+     * @param string $label
      * @param string $attribute
      */
-    public function __construct(string $attribute)
+    public function __construct( string $label, string $attribute=null)
     {
-      $this->name = $attribute;
+      $this->name = $attribute ?? Str::snake($label);
+      $this->label = $label;
     }
-
+   
     /**
      * @param string $attribute
      *
-     * @return Column
+     * @return mixed
      */
-    public static function make(string $attribute): Column
+    public static function make( string $label,string $attribute=null)
     {
-        return new static($$attribute);
+        return new static($label,$attribute);
+    }
+
+    
+    /**
+     * @param string $attribute
+     *
+     * @return mixed
+     */
+    public static function status( string $label,string $attribute=null)
+    {
+        $column = new static($label,$attribute);
+        
+        $column->component('status');
+
+        return $column;
     }
 
     /**
-     * @return string
+     * $actions array com as ações
      */
-    public function getAttribute(): string
+    public static function actions(array $actions,$label="Action",$attribute=null)
     {
-        return $this->name;
+        $column = new static($label,$attribute);
+
+        $column->sortable = false;
+        $column->searchable = false;
+
+        $column->actions = collect($actions)->map(function($column){
+            $column->sortable = false;
+            $column->searchable = false;
+            $column->attributes['class'] = 'flex items-center space-x-2';
+            return $column;
+        })->toArray();
+
+        return $column;
     }
-    /**
-     * @return string
-     */
-    public function __get($name)
-    {
-        return $this->{$name};
-    }
+
 }

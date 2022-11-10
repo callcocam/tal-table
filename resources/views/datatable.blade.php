@@ -1,11 +1,15 @@
 <x-tall-app-table :tableAttr="$tableAttr">
-
     <x-slot name="actions">
         <ul>
-            <li>
-                <a href="{{ route('admin.make.create') }}"
-                    class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
-            </li>
+            @if ($route = data_get($tableAttr, 'crud.create'))
+                <li>
+                    <a href="{{ $route }}"
+                        class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
+                        {{ __('Cadastrar Novo') }}
+                    </a>
+                </li>
+            @endif
+
             <li>
                 <a href="#"
                     class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another
@@ -29,7 +33,12 @@
         </th>
         <th
             class="whitespace-nowrap rounded-tr-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-            Action
+            @if ($route = data_get($tableAttr, 'crud.create'))
+                <a href="{{ $route }}"
+                    class="flex items-center px-3  font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
+                    {{ __('Cadastrar Novo') }}
+                </a>
+            @endif
         </th>
     </x-slot>
     @if ($models)
