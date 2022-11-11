@@ -11,7 +11,8 @@
         <div class="relative max-w-md rounded-lg bg-white pt-10 p-4 text-center transition-all duration-300 dark:bg-navy-700"
             x-show="showModal" x-transition:enter="easy-out"
             x-transition:enter-start="opacity-0 [transform:translate3d(0,1rem,0)]"
-            x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" x-transition:leave="easy-in"
+            x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" 
+            x-transition:leave="easy-in"
             x-transition:leave-start="opacity-100 [transform:translate3d(0,0,0)]"
             x-transition:leave-end="opacity-0 [transform:translate3d(0,1rem,0)]">
 

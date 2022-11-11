@@ -46,7 +46,7 @@ class Column
      *
      * @return mixed
      */
-    public static function status( string $label,string $attribute=null)
+    public static function status( string $label='Status',string $attribute='status')
     {
         $column = new static($label,$attribute);
         

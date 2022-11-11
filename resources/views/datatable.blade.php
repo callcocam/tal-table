@@ -42,10 +42,31 @@
                 </x-tall-table.cell>
                 </x-tall-table.sample-row>
                 @endif
-                @foreach ($models as $model)
+                @forelse ($models as $model)
                     <x-tall-table.row :$columns :$model :$tableAttr wire:loading.class.delay="opacity-50"
                         wire:key="row-{{ $model->id }}" />
-                @endforeach
+
+                @empty
+                    <x-tall-table.sample-row wire:key="row-empty">
+                        <x-tall-table.cell colspan="100">
+                            <div class="flex flex-col justify-content-center">
+                                <div class="flex justify-center items-center space-x-2">
+                                    <x-tall-icon.inbox class="h-8 w-8 text-cool-gray-400" />
+                                    <span
+                                        class="font-medium py-8 text-cool-gray-400 text-xl">{{ __('No transactions found') }}...</span>
+                                </div>
+                                @if ($routeCreate = data_get($tableAttr, 'crud.create'))
+                                    <x-tall-app-link href="{{ $routeCreate }}">
+                                        <div class="flex space-x-1 w-full justify-center">
+                                            <x-tall-icon name="plus" class="h-4.5 w-4.5" />
+                                        {{ __('Create your first record') }}
+                                        </div>
+                                    </x-tall-app-link>
+                                @endif
+                            </div>
+                        </x-tall-table.cell>
+                    </x-tall-table.sample-row>
+                @endforelse
                 <x-slot name="pagination">
                     {{ $models->links() }}
                 </x-slot>

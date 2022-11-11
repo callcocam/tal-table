@@ -8,6 +8,6 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<tr {{ $attributes->class('border-y border-transparent border-b-slate-200 dark:border-b-navy-500') }}>
+<tr {{ $attributes->class('border-y border-transparent ') }}>
     {{ $slot }}
 </tr>

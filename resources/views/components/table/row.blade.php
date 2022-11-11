@@ -7,11 +7,13 @@
         @foreach ($columns as $column)
             @if ($actions = array_filter($column->actions))
                 <x-tall-table.cell>
+                   <div class="flex space-x-4 items-center">
                     @foreach ($actions as $action)
-                        @if ($action->visible)
-                            <x-tall-link-action :action="$action" href="{{ route($action->route, $model) }}" />
-                        @endif
-                    @endforeach
+                    @if ($action->visible)
+                        <x-tall-link-action :action="$action" href="{{ route($action->route, $model) }}" />
+                    @endif
+                @endforeach
+                   </div>
                 </x-tall-table.cell>
             @else
                 <x-tall-table.cell>
