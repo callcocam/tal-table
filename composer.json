@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Tall\\Table\\TableServiceProvider"
+                "Tall\\Table\\Providers\\TableServiceProvider"
             ]
         }
     },
