@@ -7,7 +7,6 @@
     "require": {
         "php": "^7.3|^8.0",
         "callcocam/tall-sluggable": "dev-main",
-        "callcocam/tall-compnents": "dev-main",
         "callcocam/tall-orm": "dev-main"
     },
     "autoload": {
