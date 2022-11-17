@@ -72,4 +72,5 @@
                 </x-slot>
             </x-tall-app-table>
         </x-tall-app-filter>
+        @livewire('tall::admin.imports.csv-component', ['model' => $config])
     </x-tall-app-main>

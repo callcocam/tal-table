@@ -1,11 +1,12 @@
-@props(['tableAttr' => [], 'filters' => null, 'status' => null])
+@props(['tableAttr' => [], 'filters' => null, 'status' => null, 'config' => null])
 <div x-data="{ isFilterExpanded: @entangle($attributes->wire('model')).defer }">
     <div class="flex items-center justify-between">
         <h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
             {{ data_get($tableAttr, 'active', 'Lista dados da tabela') }}
         </h2>
         <div class="flex items-center">
-            <x-tall-input.search wire:model.debounce.500ms="filters.search" placeholder="{{ __('Search here') }}..." type="text" />
+            <x-tall-input.search wire:model.debounce.500ms="filters.search" placeholder="{{ __('Search here') }}..."
+                type="text" />
             <x-tall-button.flat wire:click="$toggle('isFilterExpanded')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewbox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M18 11.5H6M21 4H3m6 15h6" />
@@ -25,6 +26,9 @@
                     <x-tall-icon name="plus" class="h-4.5 w-4.5" />
                 </a>
             @endif
+            <x-tall-button.flat title="Importar dados de um CSV"  @click="$dispatch('show-drawer', { drawerId: 'edit-todo-drawer' })">
+                <x-tall-icon name="excel-96" class="h-4.5 w-4.5" /> 
+            </x-tall-button.flat>
         </div>
     </div>
     <div x-show="isFilterExpanded" x-collapse>

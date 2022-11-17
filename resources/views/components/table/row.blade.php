@@ -2,18 +2,22 @@
 <tr {{ $attributes->class('border-y border-transparent border-b-slate-200 dark:border-b-navy-500') }}>
     @if ($columns)
         <x-tall-table.cell>
-            <x-tall-input.checkbox wire:model="selected" value="{{ $model->id }}" />
+            @if (auth()->id() == $model->id)
+                <x-tall-input.checkbox disabled value="{{ $model->id }}" />
+            @else
+                <x-tall-input.checkbox wire:model="selected" value="{{ $model->id }}" />
+            @endif
         </x-tall-table.cell>
         @foreach ($columns as $column)
             @if ($actions = array_filter($column->actions))
                 <x-tall-table.cell>
-                   <div class="flex space-x-4 items-center">
-                    @foreach ($actions as $action)
-                    @if ($action->visible)
-                        <x-tall-link-action :action="$action" href="{{ route($action->route, $model) }}" />
-                    @endif
-                @endforeach
-                   </div>
+                    <div class="flex space-x-4 items-center">
+                        @foreach ($actions as $action)
+                            @if ($action->visible)
+                                <x-tall-link-action :action="$action" href="{{ route($action->route, $model) }}" />
+                            @endif
+                        @endforeach
+                    </div>
                 </x-tall-table.cell>
             @else
                 <x-tall-table.cell>
