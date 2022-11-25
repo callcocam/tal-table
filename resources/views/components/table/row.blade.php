@@ -13,9 +13,12 @@
                 <x-tall-table.cell>
                     <div class="flex space-x-4 items-center">
                         @foreach ($actions as $action)
-                            @if ($action->visible)
-                                <x-tall-link-action :action="$action" href="{{ route($action->route, $model) }}" />
-                            @endif
+                            {{-- @can($action->route) --}}
+                                @if ($action->visible)
+                                    <x-tall-link-action title="{{$action->route}}" :model="$model" :action="$action"
+                                        href="{{ route($action->route, $model) }}" />
+                                @endif
+                            {{-- @endcan --}}
                         @endforeach
                     </div>
                 </x-tall-table.cell>

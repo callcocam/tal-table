@@ -1,4 +1,5 @@
-@props(['action'])
+@props(['action','model'])
+
 <a {{ $attributes->merge($action->attributes) }}>
     @if ($action->icon)
         <x-tall-icon name="{{ $action->icon }}" />
