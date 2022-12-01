@@ -4,9 +4,9 @@
         <x-tall-icon name="trash" />
     </button>
     <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5"
-        x-show="showModal" role="dialog" @keydown.window.escape="$wire.showModal = false">
+        x-show="showModal" role="dialog" @keydown.window.escape="cancel()">
         <div class="absolute inset-0 bg-slate-900/60 transition-opacity duration-300"
-            x-on:click="$wire.showModal = false" x-show="showModal" x-transition:enter="ease-out"
+            x-on:click="cancel()" x-show="showModal" x-transition:enter="ease-out"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
         <div class="relative max-w-md rounded-lg bg-white pt-4 pb-4 text-center transition-all duration-300 dark:bg-navy-700"
@@ -30,7 +30,7 @@
             <div class="my-4 mt-8 h-px bg-slate-200 dark:bg-navy-500"></div>
 
             <div class="space-x-3">
-                <button wire:click="$set('showModal', false)"
+                <button wire:click="cancel()"
                     class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
                     {{ __('Cancel') }}
                 </button>

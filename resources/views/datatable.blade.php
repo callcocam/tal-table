@@ -59,7 +59,7 @@
                                     <x-tall-app-link href="{{ $routeCreate }}">
                                         <div class="flex space-x-1 w-full justify-center">
                                             <x-tall-icon name="plus" class="h-4.5 w-4.5" />
-                                        {{ __('Create your first record') }}
+                                            {{ __('Create your first record') }}
                                         </div>
                                     </x-tall-app-link>
                                 @endif
@@ -72,5 +72,9 @@
                 </x-slot>
             </x-tall-app-table>
         </x-tall-app-filter>
-        @livewire('tall::admin.imports.csv-component', ['model' => $config])
+        @if ($import = $this->import)
+            {{-- @livewire('tall::admin.imports.csv-component', ['model' => $config]) --}}
+            @livewire($import, ['model' => $config])
+
+        @endif
     </x-tall-app-main>
